@@ -1,44 +1,44 @@
-const {User} = require ('../models');
+const { User } = require( '../models' );
 
- const createUser = async (req, res, next) => {
-  const createdUser = await User.create(req.body);
-  res.send(createdUser);
-};
+class UserController {
 
- const getUser = async (req, res, next) => {
+  createUser = async (req, res, next) => {
+    const createdUser = await User.create( req.body );
+    res.send( createdUser );
+  };
 
-  const user = await User.findByPk(req.params.id);
-  res.send(user);
-};
+  getUserById = async (req, res, next) => {
 
- const updateUser = async (req, res, next) => {
-  const [updatedRowsCount, rows] = await User.update(req.body, {
-    where: {
-      id: req.params.id,
-    },
-    returning: true,
-  });
-  if (updatedRowsCount) {
-    return res.send(rows[0]);
-  }
-  res.status(404).send('Error 404. User not found.');
-};
+    const user = await User.findByPk( req.params.id );
+    return res.send( user );
+  };
 
- const deleteUser = async (req, res, next) => {
-  const deleteRowsCount = await User.destroy({
-                                               where: {
-                                                 id: req.params.id
-                                               }
-                                             });
-  if (deleteRowsCount){
-    return res.send('User has been delete.');
-  }
-  res.status(404).send('Error 404. User not found.');
-};
+  updateUserById = async (req, res, next) => {
 
-module.exports = {
-  createUser,
-  getUser,
-  updateUser,
-  deleteUser
-};
+    const [updatedRowsCount, rows] = await User.update( req.body, {
+      where: {
+        id: req.params.id,
+      },
+      returning: true,
+    } );
+    if (updatedRowsCount) {
+      return res.send( rows[0] );
+    }
+    res.status( 404 ).send( 'Error 404. User not found.' );
+
+  };
+
+  deleteUserById = async (req, res, next) => {
+    const deletedRowCount = await User.destroy( {
+                                                  where: {
+                                                    id: req.params.id
+                                                  }
+                                                } );
+    if (deletedRowCount) {
+      return res.send( 'User has been deleted.' );
+    }
+    res.status( 404 ).send( 'Error 404. User not found.' );
+  };
+}
+
+module.exports = new UserController();
