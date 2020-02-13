@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define( 'User', {
     firstName: nameAttribute,
     lastName: nameAttribute,
-
     email: {
       type: DataTypes.STRING,
       unique: true,
@@ -40,9 +39,9 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {} );
   User.associate = function (models) {
-    User.hasMany(models.Task, {
-      foreignKey:'userId',
-    });
+    User.hasMany( models.Task, {
+      foreignKey: 'userId',
+    } );
   };
   return User;
 };
