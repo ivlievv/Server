@@ -1,12 +1,12 @@
 {
-  "name": "my_app",
+  "name": "fd_app_backend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src",
-    "debug": "nodemon --inspect ./src"
+    "start": "nodemon ./src/index.js",
+    "debug": "nodemon --inspect ./src/index.js"
   },
   "keywords": [],
   "author": "",
